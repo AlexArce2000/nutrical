@@ -26,8 +26,8 @@ Esta es una aplicación web interactiva y responsiva diseñada para calcular aut
 │   └── script.js       # Lógica de búsqueda, parsing de CSV y cálculos
 ├── data/
 │   └── baseAlimentos.csv # Base de datos de alimentos
-└── img/
-    └── mascota.png     # Imagen de la mascota (Nutria)
+└── assets/img/
+    └── nutriologo.png     # Imagen de la mascota (Nutria)
 ```
 
 
