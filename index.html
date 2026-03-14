@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Nutricional</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <!-- Asegúrate de que la ruta de la imagen sea correcta -->
+                <img src="assets/img/nutriologo.png" alt="Nutri-Mascota" class="mascot">
+                <div class="header-text">
+                    <h1>Calculadora Nutricional</h1>
+                    <p class="subtitle">Análisis de nutrientes por peso variable</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="config-panel">
+            <div class="input-group search-group">
+                <label for="busquedaAlimento">Buscar Alimento</label>
+                <input type="text" id="busquedaAlimento" placeholder="Escriba ej: Pollo, Pan..." autocomplete="off">
+                <div id="listaSugerencias" class="sugerencias-box"></div>
+            </div>
+            
+            <div class="input-group qty-group">
+                <label for="inputCantidad">Cantidad (g/ml)</label>
+                <input type="number" id="inputCantidad" value="100" min="1">
+            </div>
+        </section>
+
+        <div id="infoSeleccionado" class="alimento-info-card" style="display: none;"></div>
+
+        <main class="results-container">
+            <div class="table-header">
+                <div class="col-main">Nutriente</div>
+                <div class="col-val">Base</div>
+                <div class="col-res">Calculado</div>
+            </div>
+            <div id="resultsBody">
+                <div class="empty-state">Busque y seleccione un alimento</div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Los valores "-" indican que el dato no está disponible en la base.</p>
+        </footer>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
