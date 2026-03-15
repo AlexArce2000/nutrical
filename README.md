@@ -38,6 +38,9 @@ Esta es una aplicación web interactiva y responsiva diseñada para calcular aut
 -   **Cálculo:** Se aplica la regla de tres simple:
     $$\text{Resultado} = \frac{\text{Cantidad Usuario} \times \text{Valor Nutriente Base}}{\text{Peso Base Alimento}}$$
 -   **Validación:** Antes de renderizar, el script verifica si el valor original es un guion o asterisco para no mostrar resultados erróneos.
+-   **Interactividad:** El buscador difuso se implementa con un evento `input` que filtra los alimentos en tiempo real, mostrando solo los que coinciden con el texto ingresado.
+-   **Exportación CSV:** Permite al usuario exportar la tabla de resultados con un formato específico, incluyendo una fila de totales y una fila adicional con las calorías calculadas a partir de los macronutrientes.
+-   **Importación de Datos:** El usuario puede importar un archivo CSV con la misma estructura que la base de datos para actualizar o agregar nuevos alimentos, con validaciones para asegurar la integridad de los datos.   
 
 ## 🛠️ Tecnologías Utilizadas
 
