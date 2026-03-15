@@ -127,31 +127,52 @@ function actualizarHistorial() {
     const body = document.getElementById('historialBody');
     body.innerHTML = '';
 
+    // Inicializamos todos los sumadores en 0
     let sums = { hc:0, prot:0, grasa:0, na:0, k:0, p:0, ca:0, fe:0, colest:0, purinas:0, fibra:0, agua:0, kcal:0 };
 
     historial.forEach(item => {
-        for (let key in sums) { sums[key] += item[key]; }
+        // Sumamos cada valor al total acumulado
+        for (let key in sums) { 
+            sums[key] += parseFloat(item[key]) || 0; 
+        }
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${item.nombre}</td><td>${item.cantidad}</td>
-            <td>${item.hc.toFixed(1)}</td><td>${item.prot.toFixed(1)}</td><td>${item.grasa.toFixed(1)}</td>
-            <td>${item.fibra.toFixed(1)}</td><td>${item.na.toFixed(1)}</td><td>${item.k.toFixed(1)}</td>
-            <td>${item.p.toFixed(1)}</td><td>${item.ca.toFixed(1)}</td><td>${item.fe.toFixed(1)}</td>
-            <td>${item.colest.toFixed(1)}</td><td>${item.purinas.toFixed(1)}</td><td>${item.agua.toFixed(1)}</td>
-            <td>${item.kcal.toFixed(1)}</td>
+            <td>${parseFloat(item.hc).toFixed(1)}</td>
+            <td>${parseFloat(item.prot).toFixed(1)}</td>
+            <td>${parseFloat(item.grasa).toFixed(1)}</td>
+            <td>${parseFloat(item.fibra).toFixed(1)}</td>
+            <td>${parseFloat(item.na).toFixed(1)}</td>
+            <td>${parseFloat(item.k).toFixed(1)}</td>
+            <td>${parseFloat(item.p).toFixed(1)}</td>
+            <td>${parseFloat(item.ca).toFixed(1)}</td>
+            <td>${parseFloat(item.fe).toFixed(1)}</td>
+            <td>${parseFloat(item.colest).toFixed(1)}</td>
+            <td>${parseFloat(item.purinas).toFixed(1)}</td>
+            <td>${parseFloat(item.agua).toFixed(1)}</td>
+            <td>${parseFloat(item.kcal).toFixed(1)}</td>
             <td><button class="btn-remove" onclick="eliminarItem(${item.id})">✕</button></td>
         `;
         body.appendChild(tr);
     });
 
-    // Actualizar fila de totales
-    for (let key in sums) {
-        let el = document.getElementById('tot' + key.charAt(0).toUpperCase() + key.slice(1));
-        if (el) el.textContent = sums[key].toFixed(1);
-    }
+    // ACTUALIZACIÓN MANUAL DE CADA TOTAL (Para asegurar que los IDs coincidan)
+    document.getElementById('totHC').textContent = sums.hc.toFixed(1);
+    document.getElementById('totProt').textContent = sums.prot.toFixed(1);
+    document.getElementById('totGrasa').textContent = sums.grasa.toFixed(1);
+    document.getElementById('totFibra').textContent = sums.fibra.toFixed(1);
+    document.getElementById('totNa').textContent = sums.na.toFixed(1);
+    document.getElementById('totK').textContent = sums.k.toFixed(1);
+    document.getElementById('totP').textContent = sums.p.toFixed(1);
+    document.getElementById('totCa').textContent = sums.ca.toFixed(1);
+    document.getElementById('totFe').textContent = sums.fe.toFixed(1);
+    document.getElementById('totColest').textContent = sums.colest.toFixed(1);
+    document.getElementById('totPurinas').textContent = sums.purinas.toFixed(1);
+    document.getElementById('totAgua').textContent = sums.agua.toFixed(1);
+    document.getElementById('totKcal').textContent = sums.kcal.toFixed(1);
 
-    // Kcals por macros
+    // Cálculo de Kcals por macros para la fila de abajo
     const mKcals = (sums.hc * 4) + (sums.prot * 4) + (sums.grasa * 9);
     document.getElementById('totalKcals').textContent = mKcals.toFixed(2) + " kcal (basado en HC, Prot, Grasa)";
 }
