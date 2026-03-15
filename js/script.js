@@ -230,11 +230,9 @@ document.getElementById('btnExportar').addEventListener('click', () => {
 
     csvContent += filaTotales.join(';') + "\n";
 
-    // 3. Añadir fila de Kcals por Macros (opcional, como en tu imagen)
     const mKcals = (totales.hc * 4) + (totales.prot * 4) + (totales.grasa * 9);
     csvContent += `\n;Kcals Totales (Macros);${mKcals.toFixed(2).replace('.', ',')} kcal\n`;
 
-    // 4. Crear link de descarga
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -256,7 +254,6 @@ actualizarHistorial();
 const btnImportar = document.getElementById('btnImportar');
 const inputFiles = document.getElementById('inputFiles');
 
-// Al hacer clic en el botón visual, disparamos el selector de archivos oculto
 btnImportar.addEventListener('click', () => inputFiles.click());
 
 inputFiles.addEventListener('change', function(e) {
@@ -268,17 +265,13 @@ inputFiles.addEventListener('change', function(e) {
         const contenido = e.target.result;
         procesarImportacion(contenido);
     };
-    // Leemos como UTF-8 para soportar tildes
     lector.readAsText(archivo, "UTF-8");
 });
 
 function procesarImportacion(csvTexto) {
     try {
-        // 1. Quitar el BOM y separar por líneas
         const lineas = csvTexto.replace(/^\uFEFF/, "").split(/\r?\n/);
         const nuevosItems = [];
-
-        // 2. Recorrer líneas (empezamos en 1 para saltar el encabezado)
         for (let i = 1; i < lineas.length; i++) {
             const fila = lineas[i].split(';');
             
@@ -292,9 +285,8 @@ function procesarImportacion(csvTexto) {
                 return parseFloat(val.replace(',', '.')) || 0;
             };
 
-            // Creamos el objeto con la misma estructura que usa tu app
             const item = {
-                id: Date.now() + i, // Generamos un ID nuevo
+                id: Date.now() + i, 
                 nombre: fila[0],
                 cantidad: fila[1],
                 hc: limpiarNum(fila[2]),
@@ -317,7 +309,7 @@ function procesarImportacion(csvTexto) {
         if (nuevosItems.length > 0) {
             if (confirm(`Se han detectado ${nuevosItems.length} alimentos. ¿Deseas agregarlos a tu tabla actual?`)) {
                 historial = [...historial, ...nuevosItems];
-                actualizarHistorial(); // Esta función ya la tienes, recalcula todo
+                actualizarHistorial();
                 alert("Importación completada con éxito.");
             }
         } else {
@@ -327,6 +319,5 @@ function procesarImportacion(csvTexto) {
         console.error(error);
         alert("Error: El archivo no tiene el formato correcto.");
     }
-    // Limpiar el input para permitir cargar el mismo archivo después si se desea
     inputFiles.value = "";
 }
