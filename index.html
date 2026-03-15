@@ -10,7 +10,6 @@
     <div class="container">
         <header>
             <div class="header-content">
-                <!-- Asegúrate de que la ruta de la imagen sea correcta -->
                 <img src="assets/img/nutriologo.png" alt="Nutri-Mascota" class="mascot">
                 <div class="header-text">
                     <h1>Calculadora Nutricional</h1>
@@ -49,7 +48,6 @@
             <p>Los valores "-" indican que el dato no está disponible en la base.</p>
         </footer>
 
-<!-- Debajo de la sección de resultados (.results-container) -->
 <div class="actions-bar">
     <button id="btnGuardar" class="btn-save">Guardar en Tabla</button>
 </div>
@@ -57,10 +55,11 @@
 <section class="export-section">
     <div class="export-header">
         <h2>Historial de Cálculos</h2>
+        <button id="btnImportar" class="btn-import">Importar Tabla</button>
+        <input type="file" id="inputFiles" style="display:none" accept=".csv">
         <button id="btnExportar" class="btn-excel">Exportar a Excel</button>
     </div>
     
-<!-- Dentro de la sección export-section -->
 <div class="table-wrapper">
     <table id="tablaHistorial">
         <thead>

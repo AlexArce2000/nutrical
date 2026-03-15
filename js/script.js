@@ -251,3 +251,82 @@ document.addEventListener('click', (e) => { if (!inputBusqueda.contains(e.target
 
 init();
 actualizarHistorial();
+// --- LÓGICA DE IMPORTACIÓN ---
+
+const btnImportar = document.getElementById('btnImportar');
+const inputFiles = document.getElementById('inputFiles');
+
+// Al hacer clic en el botón visual, disparamos el selector de archivos oculto
+btnImportar.addEventListener('click', () => inputFiles.click());
+
+inputFiles.addEventListener('change', function(e) {
+    const archivo = e.target.files[0];
+    if (!archivo) return;
+
+    const lector = new FileReader();
+    lector.onload = function(e) {
+        const contenido = e.target.result;
+        procesarImportacion(contenido);
+    };
+    // Leemos como UTF-8 para soportar tildes
+    lector.readAsText(archivo, "UTF-8");
+});
+
+function procesarImportacion(csvTexto) {
+    try {
+        // 1. Quitar el BOM y separar por líneas
+        const lineas = csvTexto.replace(/^\uFEFF/, "").split(/\r?\n/);
+        const nuevosItems = [];
+
+        // 2. Recorrer líneas (empezamos en 1 para saltar el encabezado)
+        for (let i = 1; i < lineas.length; i++) {
+            const fila = lineas[i].split(';');
+            
+            // Validaciones: saltar si la fila está vacía o es la de TOTALES
+            if (fila.length < 10) continue;
+            if (fila[0].trim().toUpperCase() === "TOTALES" || fila[0].trim() === "") continue;
+
+            // Función interna para convertir "10,50" (Excel) a 10.50 (JS)
+            const limpiarNum = (val) => {
+                if (!val) return 0;
+                return parseFloat(val.replace(',', '.')) || 0;
+            };
+
+            // Creamos el objeto con la misma estructura que usa tu app
+            const item = {
+                id: Date.now() + i, // Generamos un ID nuevo
+                nombre: fila[0],
+                cantidad: fila[1],
+                hc: limpiarNum(fila[2]),
+                prot: limpiarNum(fila[3]),
+                grasa: limpiarNum(fila[4]),
+                fibra: limpiarNum(fila[5]),
+                na: limpiarNum(fila[6]),
+                k: limpiarNum(fila[7]),
+                p: limpiarNum(fila[8]),
+                ca: limpiarNum(fila[9]),
+                fe: limpiarNum(fila[10]),
+                colest: limpiarNum(fila[11]),
+                purinas: limpiarNum(fila[12]),
+                agua: limpiarNum(fila[13]),
+                kcal: limpiarNum(fila[14])
+            };
+            nuevosItems.push(item);
+        }
+
+        if (nuevosItems.length > 0) {
+            if (confirm(`Se han detectado ${nuevosItems.length} alimentos. ¿Deseas agregarlos a tu tabla actual?`)) {
+                historial = [...historial, ...nuevosItems];
+                actualizarHistorial(); // Esta función ya la tienes, recalcula todo
+                alert("Importación completada con éxito.");
+            }
+        } else {
+            alert("No se encontraron datos válidos en el archivo.");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Error: El archivo no tiene el formato correcto.");
+    }
+    // Limpiar el input para permitir cargar el mismo archivo después si se desea
+    inputFiles.value = "";
+}
