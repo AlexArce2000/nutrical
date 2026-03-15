@@ -48,6 +48,61 @@
         <footer>
             <p>Los valores "-" indican que el dato no está disponible en la base.</p>
         </footer>
+
+<!-- Debajo de la sección de resultados (.results-container) -->
+<div class="actions-bar">
+    <button id="btnGuardar" class="btn-save">Guardar en Tabla</button>
+</div>
+
+<section class="export-section">
+    <div class="export-header">
+        <h2>Historial de Cálculos</h2>
+        <button id="btnExportar" class="btn-excel">Exportar a Excel</button>
+    </div>
+    
+<!-- Dentro de la sección export-section -->
+<div class="table-wrapper">
+    <table id="tablaHistorial">
+        <thead>
+            <tr>
+                <th>Alimento</th>
+                <th>Cant.</th>
+                <th>HC</th>
+                <th>Prot.</th>
+                <th>Grasa</th>
+                <th>Fibra</th>
+                <th>Na</th>
+                <th>K</th>
+                <th>P</th>
+                <th>Ca</th>
+                <th>Fe</th>
+                <th>Colest</th>
+                <th>Purinas</th>
+                <th>Agua</th>
+                <th>Kcal</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody id="historialBody"></tbody>
+        <tfoot>
+            <tr class="row-totales">
+                <td colspan="2">TOTALES</td>
+                <td id="totHC">0</td><td id="totProt">0</td><td id="totGrasa">0</td>
+                <td id="totFibra">0</td><td id="totNa">0</td><td id="totK">0</td>
+                <td id="totP">0</td><td id="totCa">0</td><td id="totFe">0</td>
+                <td id="totColest">0</td><td id="totPurinas">0</td><td id="totAgua">0</td>
+                <td id="totKcal">0</td>
+                <td></td>
+            </tr>
+            <tr class="row-kcals">
+                <td colspan="2">Kcals calculadas (Macros):</td>
+                <td id="totalKcals" colspan="14">0.00 kcal</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+    <button id="btnBorrarTodo" class="btn-clear">Borrar Todo</button>
+</section>        
     </div>
     <script src="js/script.js"></script>
 </body>

@@ -120,7 +120,114 @@ input:focus { border-color: var(--primary-red); }
 .empty-state { text-align: center; padding: 40px; color: #95a5a6; }
 
 footer { padding: 15px; text-align: center; font-size: 0.7rem; color: #999; }
+/* Botones de acción */
+.actions-bar {
+    padding: 0 20px 20px;
+    display: flex;
+    justify-content: center;
+}
 
+.btn-save {
+    background: var(--primary-red);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.btn-save:hover { background: var(--dark-red); transform: scale(1.02); }
+
+/* Sección de Exportación */
+.export-section {
+    margin: 20px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid var(--border-red);
+    border-radius: 8px;
+}
+
+.export-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-excel {
+    background: #217346; /* Color oficial de Excel */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+#tablaHistorial {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+#tablaHistorial th, #tablaHistorial td {
+    padding: 10px;
+    border: 1px solid #eee;
+    text-align: left;
+}
+
+#tablaHistorial th { background: var(--light-red); color: var(--dark-red); }
+
+.btn-remove {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-clear {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+/********************/
+/* Estilo para la fila de totales (similar a tu foto) */
+.row-totales td {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    border-top: 2px solid var(--dark-red) !important;
+    color: #000;
+}
+
+.row-kcals td {
+    background-color: #ffffff;
+    font-weight: bold;
+    color: var(--dark-red);
+    font-size: 1.1rem;
+    border: none !important;
+}
+
+#tablaHistorial tfoot td {
+    padding: 12px 10px;
+    text-align: left;
+}
 /* Responsive */
 @media (max-width: 480px) {
     .header-content { flex-direction: column; text-align: center; }
